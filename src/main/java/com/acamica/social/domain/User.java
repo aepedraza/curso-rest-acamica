@@ -39,6 +39,7 @@ public class User extends PersistentObject {
         this.email = requireNonNull(email, "email must be not null");
     }
 
+    // Funciona como Factory de Message
     public Message publish(String body) {
         requireNonNull("Message must not be null");
 
@@ -64,6 +65,7 @@ public class User extends PersistentObject {
         return Collections.unmodifiableSortedSet(messages);
     }
 
+    // El mismo User se agrega a la lista de followers del que recibe como parametro
     public void follow(User user) {
         requireNonNull(user, "Can't follow a null user");
         user.addFollower(this);
@@ -87,6 +89,7 @@ public class User extends PersistentObject {
         return Collections.unmodifiableSet(followers);
     }
 
+    // Se publica el mensaje y se lo agrega a los reply del Message parametro
     public Message reply(String content, Message message) {
         Message reply = publish(content);
         message.addReply(reply);
